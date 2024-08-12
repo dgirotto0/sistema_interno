@@ -14,7 +14,7 @@ namespace InventoryManagementSystem
     public partial class ProductForm : Form
     {
 
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\DANIEL.GIROTTO\ONEDRIVE - INFORDOC SERVICOS DE INFORMATICA LTDA\DOCUMENTS\DBMS.MDF"";Integrated Security=True;");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=<SEU BANCO>;Integrated Security=True;");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         public ProductForm()
@@ -27,8 +27,8 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvProduct.Rows.Clear();
-            //cmd = new SqlCommand("SELECT * FROM tbProduct WHERE CONCAT(prodid, productname, price, description, category) LIKE '%" + txtSearch.Text +"%'", con);
-            cmd = new SqlCommand("SELECT * FROM tbProduct", con);
+            //cmd = new SqlCommand("SELECT * FROM <SUA TABELA> WHERE CONCAT(prodid, productname, price, description, category) LIKE '%" + txtSearch.Text +"%'", con);
+            cmd = new SqlCommand("SELECT * FROM <SUA TABELA>", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -76,7 +76,7 @@ namespace InventoryManagementSystem
                 if (MessageBox.Show("Tem certeza que deseja excluir esse produto?", "Excluir Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new SqlCommand("DELETE FROM tbProduct WHERE productname LIKE '" + dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cmd = new SqlCommand("DELETE FROM <SUA TABELA> WHERE productname LIKE '" + dgvProduct.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Produto excluído!");
@@ -94,7 +94,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvProduct.Rows.Clear();
-            cmd = new SqlCommand($"SELECT * FROM tbCostumer WHERE productname LIKE '%{txtSearch.Text}%'", con);
+            cmd = new SqlCommand($"SELECT * FROM <SUA TABELA> WHERE productname LIKE '%{txtSearch.Text}%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
