@@ -13,13 +13,13 @@ namespace InventoryManagementSystem
     public class DataBase
     {
 
-        private static string server = "172.16.1.208";
-        private static string database = "Excel";
+        private static string server = "<SEU SERVIDOR>";
+        private static string database = "<SEU BANCO>";
 
         public static string MsgErro { get; private set; }
         public static string StrCon
         {
-            get { return $"Data Source = {server} ;Initial Catalog = {database}; User ID = sa; Password=********;Connect Timeout = 30; Encrypt=False;Trust Server Certificate=False;Application Intent = ReadWrite; Multi Subnet Failover=False"; }
+            get { return $"Data Source = {server} ;Initial Catalog = {database}; User ID = <USER>; Password= <SENHA>; Connect Timeout = 30; Encrypt=False;Trust Server Certificate=False;Application Intent = ReadWrite; Multi Subnet Failover=False"; }
         }
         public static bool AdicionarTroca(Trocas trocas)
         {
@@ -29,7 +29,7 @@ namespace InventoryManagementSystem
                 {
                     cn.Open();
 
-                    var sql = "INSERT INTO tbCostumer (Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)";
+                    var sql = "INSERT INTO <SUA TABELA> (Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)";
 
                     using (SqlCommand cmd = new SqlCommand(sql, cn)) 
                     {
