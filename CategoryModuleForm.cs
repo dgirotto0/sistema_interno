@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class CategoryModuleForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\DANIEL.GIROTTO\ONEDRIVE - INFORDOC SERVICOS DE INFORMATICA LTDA\DOCUMENTS\DBMS.MDF"";Integrated Security=True;");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\<SEU USUARIO>"";Integrated Security=True;");
         SqlCommand cmd = new SqlCommand();
         public CategoryModuleForm()
         {
@@ -31,7 +31,7 @@ namespace InventoryManagementSystem
             {
                 if (MessageBox.Show("Tem certeza que quer salvar essa categoria?", "Salvando Categoria", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("INSERT INTO tbCategory(catname) VALUES(@catname)", con);
+                    cmd = new SqlCommand("INSERT INTO <SUA TABELA>(catname) VALUES(@catname)", con);
                     cmd.Parameters.AddWithValue("@catname", txtCatName.Text);                    
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -65,7 +65,7 @@ namespace InventoryManagementSystem
             {
                 if (MessageBox.Show("Tem certeza que quer atuliazar essa categoria?", "Atualizando Categoria", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("UPTADE tbCategory SET catname = @catname WHERE catId LIKE '" + lblCategoryId.Text + "' ", con);
+                    cmd = new SqlCommand("UPTADE <SUA TABELA> SET catname = @catname WHERE catId LIKE '" + lblCategoryId.Text + "' ", con);
                     cmd.Parameters.AddWithValue("@catname", txtCatName.Text);
                     con.Open();
                     //cmd.ExecuteNonQuery();
