@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class ProductModuleForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\DANIEL.GIROTTO\ONEDRIVE - INFORDOC SERVICOS DE INFORMATICA LTDA\DOCUMENTS\DBMS.MDF"";Integrated Security=True;");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=<BANCO>;Integrated Security=True;");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         public ProductModuleForm()
@@ -25,7 +25,7 @@ namespace InventoryManagementSystem
         private void LoadProduct()
         {
             cbxCategory.Items.Clear();
-            cmd = new SqlCommand("SELECT * FROM tbCategory", con);
+            cmd = new SqlCommand("SELECT * FROM <SUA TABELA>", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -42,7 +42,7 @@ namespace InventoryManagementSystem
             {
                 if (MessageBox.Show("Tem certeza que deseja salvar?", "Salvando Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("INSERT INTO tbProduct(productname, quantity, price, description, category) VALUES(@productname, @quantity, @price, @description, @category)", con);
+                    cmd = new SqlCommand("INSERT INTO <SUA TABELA>(productname, quantity, price, description, category) VALUES(@productname, @quantity, @price, @description, @category)", con);
                     cmd.Parameters.AddWithValue("@productname", txtProductName.Text);
                     cmd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
                     cmd.Parameters.AddWithValue("@price", txtPrice.Text);
@@ -78,7 +78,7 @@ namespace InventoryManagementSystem
             {
                 if (MessageBox.Show("Tem certeza que deseja atualizar esse produto?", "Atualização Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("UPTADE tbProduct SET productname = @productname, quantity = @quantity, price = @price, description = @description, category = @category WHERE prodid LIKE '" + txtProductName + "' ", con);
+                    cmd = new SqlCommand("UPTADE <SUA TABELA> SET productname = @productname, quantity = @quantity, price = @price, description = @description, category = @category WHERE prodid LIKE '" + txtProductName + "' ", con);
                     cmd.Parameters.AddWithValue("@quantity", txtQuantity.Text);
                     cmd.Parameters.AddWithValue("@price", txtPrice.Text);
                     cmd.Parameters.AddWithValue("@description ", txtDescription.Text);
