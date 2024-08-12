@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class UserForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\daniel.girotto\OneDrive - INFORDOC SERVICOS DE INFORMATICA LTDA\Documents\dbMS.mdf"";Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;AttachDbFilename=""<CAMINHO>\dbMS.mdf"";Integrated Security=True;Connect Timeout=30");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         public UserForm()
@@ -26,7 +26,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvUser.Rows.Clear();
-            cmd = new SqlCommand("SELECT * FROM tbUser", con);
+            cmd = new SqlCommand("SELECT * FROM <SUA TABELA>", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while(dr.Read())
@@ -68,7 +68,7 @@ namespace InventoryManagementSystem
                 if (MessageBox.Show("Are you sure you want to delete this user?", "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new SqlCommand("DELETE FROM tbUser WHERE username LIKE '" + dgvUser.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cmd = new SqlCommand("DELETE FROM <SUA TABELA> WHERE username LIKE '" + dgvUser.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Record has been successfully deleted!");
