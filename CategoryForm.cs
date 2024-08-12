@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class CategoryForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\DANIEL.GIROTTO\ONEDRIVE - INFORDOC SERVICOS DE INFORMATICA LTDA\DOCUMENTS\DBMS.MDF"";Integrated Security=True;");
+        SqlConnection con = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=""C:\USERS\<SEU USUARIO>";Integrated Security=True;");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         public CategoryForm()
@@ -25,7 +25,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvCategory.Rows.Clear();
-            cmd = new SqlCommand("SELECT * FROM tbCategory", con);
+            cmd = new SqlCommand("SELECT * FROM <SUA TABELA>", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -64,7 +64,7 @@ namespace InventoryManagementSystem
                 if (MessageBox.Show("Tem certeza que deseja excluir essa catergoria?", "Exluir Categoria", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new SqlCommand("DELETE FROM tbCategory WHERE catId LIKE '" + dgvCategory.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cmd = new SqlCommand("DELETE FROM <SUA TABELA> WHERE <ID> LIKE '" + dgvCategory.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Categoria Excluída!");
