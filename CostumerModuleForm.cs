@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class CostumerModuleForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=BALCAO;Initial Catalog=""CLIENTES"";Integrated Security=True");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=""<SEU BANCO>"";Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
         public CostumerModuleForm()
         {
@@ -36,7 +36,7 @@ namespace InventoryManagementSystem
                 string valorPinos = cbxPinos.Checked ? "SIM" : "NÃO";
 
 
-                cmd = new SqlCommand("INSERT INTO Clientes$(Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, Obs, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @Obs, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)", con);
+                cmd = new SqlCommand("INSERT INTO <SEU BANCO>$(Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, Obs, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @Obs, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)", con);
                 cmd.Parameters.AddWithValue("@Nome", txtCName.Text);
                 try
                 {
@@ -157,12 +157,12 @@ namespace InventoryManagementSystem
             {
                 if (MessageBox.Show("Tem certeza que quer atualizar esse cliente?", "Atualizando Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    using (SqlConnection conUpdate = new SqlConnection(@"Data Source=172.16.1.208;Initial Catalog=Excel;User ID=sa;Password=Infordoc01"))
+                    using (SqlConnection conUpdate = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=<SEU BANCO>;User ID=<USER>;Password=<SENHA"))
                     {
 
                         conUpdate.Open();
 
-                        using (SqlCommand cmdUpdate = new SqlCommand("UPTADE tbCostumer SET Placa = @Placa, Nome = @Nome, Telefone = @Telefone, Montadora = @Montadora, Modelo = @Modelo, Ano = @Ano, OleoOriginal = @OleoOriginal, OleoUsado = @OleoUsado, QTDE = @QTDE, FiltroOleo = @FiltroOleo, FiltroAr = @FiltroAr, FiltroCombustivel = @FiltroCombustivel, FiltroCabine @FiltroCabine, Palheta @Palheta,  Bujao = @Bujao, FluidoDirecao = @FluidoDirecao, FluidoCambio = @FluidoCambio, Pinos = @Pinos, DataTroca = @DataTroca, KM = @KM, TrocaOleo = @TrocaOleo, TrocaFiltroOleo = @TrocaFiltroOleo, TrocaFiltroAr = @TrocaFiltroAr, TrocaFiltroComb = @TrocaFiltroComb, TrocaFiltroCabine = @TrocaFiltroCabine, TrocaPalheta = @TrocaPalheta,  TrocaBujao = @TrocaBujao, TrocaFluidoDirecao = @TrocaFluidoDirecao, TrocaFluidoCambio = @TrocaFluidoCambio, TrocaPinos = @TrocaPinos)  WHERE idCustomer LIKE '" + lblCostumerId.Text + "' ", con))
+                        using (SqlCommand cmdUpdate = new SqlCommand("UPTADE <SUA TABELA> SET Placa = @Placa, Nome = @Nome, Telefone = @Telefone, Montadora = @Montadora, Modelo = @Modelo, Ano = @Ano, OleoOriginal = @OleoOriginal, OleoUsado = @OleoUsado, QTDE = @QTDE, FiltroOleo = @FiltroOleo, FiltroAr = @FiltroAr, FiltroCombustivel = @FiltroCombustivel, FiltroCabine @FiltroCabine, Palheta @Palheta,  Bujao = @Bujao, FluidoDirecao = @FluidoDirecao, FluidoCambio = @FluidoCambio, Pinos = @Pinos, DataTroca = @DataTroca, KM = @KM, TrocaOleo = @TrocaOleo, TrocaFiltroOleo = @TrocaFiltroOleo, TrocaFiltroAr = @TrocaFiltroAr, TrocaFiltroComb = @TrocaFiltroComb, TrocaFiltroCabine = @TrocaFiltroCabine, TrocaPalheta = @TrocaPalheta,  TrocaBujao = @TrocaBujao, TrocaFluidoDirecao = @TrocaFluidoDirecao, TrocaFluidoCambio = @TrocaFluidoCambio, TrocaPinos = @TrocaPinos)  WHERE <ID> LIKE '" + lblCostumerId.Text + "' ", con))
                         {
                         string valorOleo = cbxOleo.Checked ? "SIM" : "NÃO";
                         string valorFiltroOleo = cbxFiltroOleo.Checked ? "SIM" : "NÃO";
@@ -242,7 +242,7 @@ namespace InventoryManagementSystem
                     string valorPinos = cbxPinos.Checked ? "SIM" : "NÃO";
 
 
-                    cmd = new SqlCommand("INSERT INTO Clientes$(Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, Obs, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @Obs, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)", con);
+                    cmd = new SqlCommand("INSERT INTO <BANCO>$(Placa, Nome, Telefone, Montadora, Modelo, Ano, OleoOriginal, OleoUsado, QTDE, FiltroOleo, FiltroAr, FiltroCombustivel, FiltroCabine, Palheta,  Bujao, FluidoDirecao, FluidoCambio, Pinos, Obs, DataTroca, KM, TrocaOleo, TrocaFiltroOleo, TrocaFiltroAr, TrocaFiltroComb, TrocaFiltroCabine, TrocaPalheta,  TrocaBujao, TrocaFluidoDirecao, TrocaFluidoCambio, TrocaPinos) VALUES (@Placa, @Nome, @Telefone, @Montadora, @Modelo, @Ano, @OleoOriginal, @OleoUsado, @QTDE, @FiltroOleo, @FiltroAr, @FiltroCombustivel, @FiltroCabine, @Palheta,  @Bujao, @FluidoDirecao, @FluidoCambio, @Pinos, @Obs, @DataTroca, @KM, @TrocaOleo, @TrocaFiltroOleo, @TrocaFiltroAr, @TrocaFiltroComb, @TrocaFiltroCabine, @TrocaPalheta,  @TrocaBujao, @TrocaFluidoDirecao, @TrocaFluidoCambio, @TrocaPinos)", con);
                     cmd.Parameters.AddWithValue("@Nome", txtCName.Text);                    
                     try
                     {
