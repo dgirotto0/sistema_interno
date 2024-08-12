@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class UserModuleForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\daniel.girotto\OneDrive - INFORDOC SERVICOS DE INFORMATICA LTDA\Documents\dbMS.mdf"";Integrated Security=True;Connect Timeout=30");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;AttachDbFilename=""<CAMINHO>\dbMS.mdf"";Integrated Security=True;Connect Timeout=30");
         SqlCommand cmd = new SqlCommand();
 
         public UserModuleForm()
@@ -38,7 +38,7 @@ namespace InventoryManagementSystem
                 
                 if(MessageBox.Show("Are you sure you ant to save this user?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    cmd = new SqlCommand("INSERT INTO tbUser(username, fullname, password, phone) VALUES(@username, @fullname, @password, @phone)", con);
+                    cmd = new SqlCommand("INSERT INTO <SUA TABELA>(username, fullname, password, phone) VALUES(@username, @fullname, @password, @phone)", con);
                     cmd.Parameters.AddWithValue("@username", txtUserName.Text);
                     cmd.Parameters.AddWithValue("@fullname", txtFullName.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
@@ -86,7 +86,7 @@ namespace InventoryManagementSystem
                 }
                 if (MessageBox.Show("Are you sure you ant to uptade this user?", "Uptade Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                        cmd = new SqlCommand("UPTADE tbUser SET fullname = @fullname, password = @password, phone = @phone WHERE username LIKE '" + txtUserName.Text + "' ", con);
+                        cmd = new SqlCommand("UPTADE <SUA TABELA> SET fullname = @fullname, password = @password, phone = @phone WHERE username LIKE '" + txtUserName.Text + "' ", con);
                         cmd.Parameters.AddWithValue("@fullname", txtFullName.Text);
                         cmd.Parameters.AddWithValue("@password", txtPassword.Text);
                         cmd.Parameters.AddWithValue("@phone", txtPhone.Text);
