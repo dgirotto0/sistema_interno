@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class CostumerForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=BALCAO;Initial Catalog=""CLIENTES"";Integrated Security=True");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=""<SEU BANCO>"";Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
 
@@ -29,7 +29,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvCostumer.Rows.Clear();
-            cmd = new SqlCommand("SELECT TOP 30 * FROM Clientes$ ORDER BY DataTroca DESC", con);
+            cmd = new SqlCommand("SELECT TOP 30 * FROM <BANCO> ORDER BY DataTroca DESC", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -109,7 +109,7 @@ namespace InventoryManagementSystem
                 if (MessageBox.Show("Tem certeza que deseja excluir esse Cliente?", "Excluir Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new SqlCommand("DELETE FROM tbCostumer WHERE Placa LIKE '" + dgvCostumer.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cmd = new SqlCommand("DELETE FROM <SUA TABELA> WHERE Placa LIKE '" + dgvCostumer.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Cliente excluído!");
@@ -128,7 +128,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvCostumer.Rows.Clear();
-            cmd = new SqlCommand($"SELECT * FROM Clientes$ WHERE Placa LIKE '%{txtSearch.Text}%' OR Nome LIKE '%{txtSearch.Text}%' OR Telefone LIKE '%{txtSearch.Text}%'", con);
+            cmd = new SqlCommand($"SELECT * FROM <SEU BANCO> WHERE Placa LIKE '%{txtSearch.Text}%' OR Nome LIKE '%{txtSearch.Text}%' OR Telefone LIKE '%{txtSearch.Text}%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -149,7 +149,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvCostumer.Rows.Clear();
-            cmd = new SqlCommand($"SELECT TOP {dupQtdeClientes.Text} * FROM Clientes$ ORDER BY DataTroca DESC", con);
+            cmd = new SqlCommand($"SELECT TOP {dupQtdeClientes.Text} * FROM <SEU BANCO> ORDER BY DataTroca DESC", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
