@@ -14,7 +14,7 @@ namespace InventoryManagementSystem
 {
     public partial class OrderModuleForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=172.16.1.208;Initial Catalog=Excel;User ID=sa;Password=Infordoc01");
+        SqlConnection con = new SqlConnection(@"Data Source=<SERVIDOR>;Initial Catalog=<SEU BANCO>;User ID=<USER>;Password=<SENHA>");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         int qty = 0;
@@ -29,7 +29,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvCostumer.Rows.Clear();
-            cmd = new SqlCommand("SELECT cId, cname FROM tbCostumer WHERE CONCAT(cId, cname) LIKE '%" + txtSearchCus.Text + "%'", con);
+            cmd = new SqlCommand("SELECT cId, cname FROM <SUA TABELA> WHERE CONCAT(cId, cname) LIKE '%" + txtSearchCus.Text + "%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -45,7 +45,7 @@ namespace InventoryManagementSystem
         {
             int i = 0;
             dgvProduct.Rows.Clear();
-            cmd = new SqlCommand("SELECT * FROM tbProduct WHERE CONCAT(prodid, productname, price, description, category) LIKE '%" + txtSearchProd.Text + "%'", con);
+            cmd = new SqlCommand("SELECT * FROM <SUA TABELA> WHERE CONCAT(prodid, productname, price, description, category) LIKE '%" + txtSearchProd.Text + "%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -133,7 +133,7 @@ namespace InventoryManagementSystem
 
                 if (MessageBox.Show("Are you sure you ant to insert this order?", "Saving Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {                   
-                    cmd = new SqlCommand("INSERT INTO tbOrder(odate, pid, cid, cty, oprice, total) VALUES(@odate, @pid, @cid, @cty, @oprice, @total)", con);
+                    cmd = new SqlCommand("INSERT INTO <SUA TABELA>(odate, pid, cid, cty, oprice, total) VALUES(@odate, @pid, @cid, @cty, @oprice, @total)", con);
                     cmd.Parameters.AddWithValue("@odate", dateOrder.Text);                  
                     cmd.Parameters.AddWithValue("@pid", Convert.ToInt16(txtProductId.Text));
                     cmd.Parameters.AddWithValue("@cid", Convert.ToInt16(txtCustomerId.Text));
@@ -145,7 +145,7 @@ namespace InventoryManagementSystem
                     con.Close();
                     MessageBox.Show("Order has been successfully inserted!");                    
 
-                    cmd = new SqlCommand("UPTADE tbProduct SET quantity = (quantity - @quantity) WHERE prodid LIKE '" + txtProductId.Text + "' ", con);
+                    cmd = new SqlCommand("UPTADE <SUA TABELA> SET quantity = (quantity - @quantity) WHERE prodid LIKE '" + txtProductId.Text + "' ", con);
                     cmd.Parameters.AddWithValue("@quantity", Convert.ToInt16(nupQty.Value));
 
                     con.Open();
@@ -183,7 +183,7 @@ namespace InventoryManagementSystem
 
         private void GetQty()
         {
-            cmd = new SqlCommand("SELECT quantity FROM tbProduct WHERE prodid = '" + txtProductId.Text + "'", con);
+            cmd = new SqlCommand("SELECT quantity FROM <SUA TABELA> WHERE prodid = '" + txtProductId.Text + "'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
