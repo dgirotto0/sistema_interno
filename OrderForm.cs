@@ -13,7 +13,7 @@ namespace InventoryManagementSystem
 {
     public partial class OrderForm : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=172.16.1.208;Initial Catalog=Excel;User ID=sa;Password=Infordoc01");
+        SqlConnection con = new SqlConnection(@"Data Source=<SEU SERVIDOR>;Initial Catalog=<SEU BANCO>;User ID=<USER>;Password=<SENHA>");
         SqlCommand cmd = new SqlCommand();
         SqlDataReader dr;
         public OrderForm()
@@ -27,7 +27,7 @@ namespace InventoryManagementSystem
             double total = 0;
             int i = 0;
             dgvOrder.Rows.Clear();
-            cmd = new SqlCommand("SELECT orderid, odate, O.pid, P.productname, O.cid, C.cname, cty, oprice, total  FROM tbOrder AS O JOIN tbCostumer AS C ON O.cid=C.cId JOIN tbProduct AS P ON O.pid=P.prodid WHERE CONCAT (orderid, odate, O.pid, P.productname, O.cid, C.cname, cty, oprice) LIKE '%" + txtSearch.Text + "%'", con);
+            cmd = new SqlCommand("SELECT orderid, odate, O.pid, P.productname, O.cid, C.cname, cty, oprice, total  FROM <SUA TABELA> AS O JOIN <SUA TABELA> AS C ON O.cid=C.cId JOIN <SUA TABELA> AS P ON O.pid=P.prodid WHERE CONCAT (orderid, odate, O.pid, P.productname, O.cid, C.cname, cty, oprice) LIKE '%" + txtSearch.Text + "%'", con);
             con.Open();
             dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -60,12 +60,12 @@ namespace InventoryManagementSystem
                 if (MessageBox.Show("Are you sure you want to delete this order?", "Delete Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     con.Open();
-                    cmd = new SqlCommand("DELETE FROM tbOrder WHERE orderid LIKE '" + dgvOrder.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
+                    cmd = new SqlCommand("DELETE FROM <SUA TABELA> WHERE orderid LIKE '" + dgvOrder.Rows[e.RowIndex].Cells[1].Value.ToString() + "'", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Record has been successfully deleted!");
 
-                    cmd = new SqlCommand("UPTADE tbProduct SET quantity = (quantity + @quantity) WHERE prodid LIKE '" + dgvOrder.Rows[e.RowIndex].Cells[3].Value.ToString() + "' ", con);
+                    cmd = new SqlCommand("UPTADE <SUA TABELA> SET quantity = (quantity + @quantity) WHERE prodid LIKE '" + dgvOrder.Rows[e.RowIndex].Cells[3].Value.ToString() + "' ", con);
                     cmd.Parameters.AddWithValue("@quantity", Convert.ToInt16(dgvOrder.Rows[e.RowIndex].Cells[5].Value.ToString()));
                     con.Open();
                     //cmd.ExecuteNonQuery();
